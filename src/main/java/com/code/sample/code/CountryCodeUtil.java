@@ -25,15 +25,25 @@ public class CountryCodeUtil {
 		    Collections.sort(countryList);
 		    return countryList;
 	}
-	
-	
-	public static boolean verifyCountryCode(String phoneNum) {
+		
+	public static boolean isValidPhoneNumber(String phoneNum) {
 		try {
 			PhoneNumber phone= phoneUtil.parse(phoneNum, "");
-			return phone.hasCountryCode();
+			return phoneUtil.isValidNumber(phone);
 		} catch (NumberParseException e) {
-			e.printStackTrace();
-		}
+			System.out.println("The country code is Invalid");
+		} 
 		return false;
 	}
+	
+	public static int getCountryCode(String phoneNum) {
+		try {
+			PhoneNumber phone= phoneUtil.parse(phoneNum, "");
+			return phone.getCountryCode();
+		} catch (NumberParseException e) {
+			System.out.println("The country code is Invalid");
+		} 
+		return -1;
+	}
+	
 }
